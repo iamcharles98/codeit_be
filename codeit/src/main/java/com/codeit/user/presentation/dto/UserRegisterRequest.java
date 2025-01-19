@@ -4,6 +4,7 @@ import com.codeit.user.model.Position;
 import com.codeit.util.validator.EnumValue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,4 +25,6 @@ public class UserRegisterRequest {
     @NotBlank
     @EnumValue(enumClass = Position.class, message = "직군 유형이 잘못되었습니다.", ignoreCase = true)
     private String position;
+    private String introduction;
+    private List<String> tags;
 }
