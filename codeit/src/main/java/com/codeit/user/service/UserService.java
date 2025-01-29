@@ -83,11 +83,11 @@ public class UserService {
     }
 
     @Transactional
-    public void addTagToUser(UserTagRequest userTagRequest) {
-        User user = userRepository.findById(userTagRequest.getUserId())
+    public void addTagToUser(Long userId, String tagName) {
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(ErrorType.USER_NOT_FOUND));
-        Tag tag = tagRepository.findByName(userTagRequest.getTagName())
-                .orElseGet(() -> tagRepository.save(new Tag(userTagRequest.getTagName())));
+        Tag tag = tagRepository.findByName(tagName)
+                .orElseGet(() -> tagRepository.save(new Tag(tagName)));
 
         user.addTag(tag);
         userRepository.save(user);

@@ -8,6 +8,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class UserTagRequest {
-    Long userId;
     String tagName;
 }
