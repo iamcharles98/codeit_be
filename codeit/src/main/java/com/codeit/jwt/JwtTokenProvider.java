@@ -57,9 +57,9 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public Long getMemberIdxFromToken(String token) {
+    public Long getUserIdFromToken(String token) {
         Claims claims = getValidClaim(token);
-        return Long.parseLong(claims.get("id").toString());
+        return Long.parseLong(claims.get("userId").toString());
     }
 
     private Claims getValidClaim(String token) {
