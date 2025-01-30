@@ -16,11 +16,11 @@ public class MyReviewResponse {
     private String nickname;
     private String contents;
     private String emotion;
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     @Builder
     public MyReviewResponse(String moimTitle, LocalDate moimStartDate, LocalDate moimEndDate,
-                            String nickname, String contents, String emotion, LocalDateTime createdAt) {
+                            String nickname, String contents, String emotion, LocalDate createdAt) {
         this.moimTitle = moimTitle;
         this.moimStartDate = moimStartDate;
         this.moimEndDate = moimEndDate;

@@ -55,7 +55,7 @@ public class ReviewService {
                         .emotion(review.getEmotion().toString())
                         .contents(review.getContent())
                         .nickname(review.getUser().getNickname())
-                        .createdAt(review.getCreatedAt())
+                        .createdAt(review.getCreatedAt().toLocalDate())
                         .build();
 
                 responses.add(myReviewResponse);
