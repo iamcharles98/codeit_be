@@ -1,6 +1,7 @@
 package com.codeit.user.presentation;
 
 import com.codeit.user.presentation.dto.UserDetailResponse;
+import com.codeit.user.presentation.dto.UserEditRequest;
 import com.codeit.user.presentation.dto.UserLoginRequest;
 import com.codeit.user.presentation.dto.UserLoginResponse;
 import com.codeit.user.presentation.dto.UserRegisterRequest;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -33,7 +33,7 @@ public class UserController {
 
     @PostMapping("/register")
     @Operation(summary = "회원가입")
-    public ResponseEntity<BaseResponse<Long>> register(@RequestBody @Valid UserRegisterRequest userRegisterRequest) {
+    public ResponseEntity<BaseResponse<Long>> register(@Valid UserRegisterRequest userRegisterRequest) {
         log.info(userRegisterRequest.toString());
         return ResponseEntity.ok(BaseResponse.success(userService.register(userRegisterRequest)));
     }
@@ -58,6 +58,14 @@ public class UserController {
         userService.addTagToUser(userId, tagName);
         return ResponseEntity.ok(BaseResponse.success());
     }
+
+//    @PostMapping("/edit")
+//    @Operation(summary = "유저 정보 수정")
+//    public ResponseEntity<BaseResponse<Boolean>> edit(@RequestAttribute(name = "userId") Long userId,
+//                                                      @Valid UserEditRequest userEditRequest) {
+//        return ResponseEntity.ok(BaseResponse.success(userService.editUser(userId, userEditRequest)));
+//    }
+
 
     @DeleteMapping("/tag/remove/{tagName}")
     @Operation(summary = "유저 해시태그 삭제")

@@ -14,5 +14,6 @@ public class UserDetailResponse {
     private String nickname;
     private String position;
     private String introduction;
+    private String photoUrl;
     private Set<String> tags;
 }
