@@ -222,6 +222,7 @@ public class MoimService {
         return responses;
     }
 
+    @Transactional
     public Boolean participate(Long userId, Long moimId) {
         Moim moim = moimRepository.findById(moimId).orElseThrow(() -> new BaseException(ErrorType.MOIM_NOT_FOUND));
         User user = userRepository.findById(userId).orElseThrow(() -> new BaseException(ErrorType.USER_NOT_FOUND));
@@ -236,7 +237,13 @@ public class MoimService {
         return true;
     }
 
+    @Transactional
     public Boolean like(Long userId, Long moimId) {
+
+        if (likeMoimRepository.findByMoim_IdAndUser_Id(moimId, userId).isPresent()) {
+            likeMoimRepository.updateIsDeletedByMoimAndUser(false, moimId, userId);
+            return true;
+        }
         Moim moim = moimRepository.findById(moimId).orElseThrow(() -> new BaseException(ErrorType.MOIM_NOT_FOUND));
         User user = userRepository.findById(userId).orElseThrow(() -> new BaseException(ErrorType.USER_NOT_FOUND));
 
@@ -273,5 +280,11 @@ public class MoimService {
             responses.add(moimResponse);
         }
         return responses;
+    }
+
+    @Transactional
+    public Boolean dislike(Long userId, Long moimId) {
+        likeMoimRepository.updateIsDeletedByMoimAndUser(true, moimId, userId);
+        return true;
     }
 }

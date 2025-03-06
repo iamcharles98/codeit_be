@@ -12,6 +12,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -71,6 +72,13 @@ public class MoimController {
     public ResponseEntity<BaseResponse<Boolean>> like(@RequestAttribute(name = "userId") Long userId,
                                                       @RequestParam(name = "moimId") Long moimId) {
         return ResponseEntity.ok(BaseResponse.success(moimService.like(userId, moimId)));
+    }
+
+    @DeleteMapping("/dislike")
+    @Operation(summary = "모임 찜해제")
+    public ResponseEntity<BaseResponse<Boolean>> dislike(@RequestAttribute(name = "userId") Long userId,
+                                                         @RequestParam(name = "moimId") Long moimId) {
+        return ResponseEntity.ok(BaseResponse.success(moimService.dislike(userId, moimId)));
     }
 
     @GetMapping("/likes")
